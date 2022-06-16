@@ -26,12 +26,12 @@ CREATE UNIQUE INDEX uniq_employee_emp_NIN ON employee_info(NIN);
 CREATE UNIQUE INDEX uniq_employee_emp_BAN ON employee_info(BAN);
 
 
-DROP TABLE IF EXISTS Sales_Employees;
-CREATE TABLE Sales_Employees (
+DROP TABLE IF EXISTS sales_employees;
+CREATE TABLE sales_employees (
 	EmployeeID int PRIMARY KEY AUTO_INCREMENT,
     FOREIGN KEY(EmployeeID) REFERENCES employee_info(EmployeeID), 
     CommissionRate decimal(5,2) NOT NULL, 
-    totalSales decimal(10,2) NOT NULL
+    TotalSales decimal(10,2) NOT NULL
 );
 
 DROP TABLE IF EXISTS project;
@@ -48,3 +48,47 @@ CREATE TABLE employee_projects (
     FOREIGN KEY(EmployeeID) REFERENCES employee_info(EmployeeID)
 );
 
+INSERT INTO department (DepartmentName) VALUES 
+    ('Finance'),
+    ('Sales'),
+    ('Manager'),
+    ('HR'),
+    ('Employee');
+    
+    
+INSERT INTO employee_info (Name, Address, NIN, BAN, StartingSalary, CurrentSalary, DepartmentID) VALUES 
+    ('Bob Joe', '747 Evergreen Terrace', 012345678, 7474838294, 08000, 12000, 1),
+    ('Bob John', '70 Uppa Terrace', 93848555, 47446294, 91000, 120000, 2),
+    ('John Smith', '7 Terrace', 01345678, 838294, 83450, 12500, 3),
+    ('John Doe', '747 Evergreen Terrace', 018255678, 747138293, 08000, 12000, 4),
+    ('Bubba Jabba', '747 Evergreen Terrace', 054345678, 7474678294, 09000, 12900, 5);
+    
+    
+        
+    INSERT INTO sales_employees (CommissionRate, TotalSales) VALUES 
+    (12000, 250000),
+    (08000, 20000),
+    (10000, 80000),
+    (15000, 10000),
+    ('Employee', 50000);
+    
+        
+    INSERT INTO project (ProjectID, ProjectName) VALUES 
+    (1, 'The Kainos project'),
+    (2, 'The super Kainos project'),
+    (3, 'The kainos project that remains unfinished'),
+    (4, 'The ultra hyper kainos project'),
+    (5, 'The dead mans land Kainos project, good luck');
+    
+    INSERT INTO employee_projects (ProjectID, EmployeeID) VALUES
+		(1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (5, 5);
+    
+    SELECT * FROM employee_info;
+    SELECT * FROM department;
+    SELECT * FROM sales_employees;
+    SELECT * FROM project;
+    SELECT * FROM employee_projects;
